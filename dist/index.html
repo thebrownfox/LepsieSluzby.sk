@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="has-sticky-footer ">
+  <head>
+    <meta charset="utf-8">
+    <title>lepsiesluzby.sk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c"> 
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+      <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="/favicon.d42470cd.ico" type="image/x-icon">
+      <link rel="mask-icon" href="/govuk-mask-icon.6bb7270c.svg" color="#0b0c0c"> 
+      <link rel="apple-touch-icon" sizes="180x180" href="/govuk-apple-touch-icon-180x180.acf22eb4.png">
+      <link rel="apple-touch-icon" sizes="167x167" href="/govuk-apple-touch-icon-167x167.0cac1520.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="/govuk-apple-touch-icon-152x152.ba5ab2f9.png">
+      <link rel="apple-touch-icon" href="/govuk-apple-touch-icon.26c69927.png">
+    
+
+    
+  <!--[if !IE 8]><!-->
+  <link rel="stylesheet" href="/app.0b02b83a.css">
+  <!--<![endif]-->
+  <!--[if IE 8]> <link rel="stylesheet" href="/public/app-ie8.css"> <![endif]-->
+  <!--[if lt IE 9]> <script src="/vendor/html5-shiv/html5shiv.js"></script> <![endif]-->
+
+    
+    
+    <meta property="og:image" content="/govuk-opengraph-image.175eef92.png">
+  <script src="/app.0b02b83a.js"></script><script src="/form.js"></script></head>
+  <body class="govuk-template__body ">
+    <script>document.body.className = document.body.className ? document.body.className + ' js-enabled' : 'js-enabled';</script>
+    <div class="navody-template__content">
+
+      
+        <header class="sdn-header sdn-header-1200 " role="banner" data-module="sdn-header">
+  <div class="sdn-header__container govuk-width-container ">
+    <a href="/" class="sdn-header__link">
+      
+        <span class="sdn-header__product-name">
+          Portál lepsiesluzby.sk
+        </span>
+      
+    </a>
+
+    
+    <div class="sdn-header__content">
+      <button type="button" role="button" class="sdn-header__menu-button sdn-header__menu-button js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+      <nav>
+        <ul id="navigation" class="sdn-header__navigation " aria-label="Top Level Navigation">
+          
+          
+            
+              
+                <li>
+                  <a class="sdn-header__link " href="#1">O Projekte</a>
+                </li>
+              
+            
+          
+            
+              
+                <li>
+                  <a class="sdn-header__link " href="#2">Zadané podnety</a>
+                </li>
+              
+            
+          
+        </ul>
+      </nav>
+    </div>
+    
+  </div>
+</header>
+
+      
+
+      
+
+  <section class="sdn-hero">
+  <div class="govuk-width-container">
+    <div class="sdn-hero-inner">
+      <div class="sdn-hero-text">
+        <h1 class="snd-hero-title govuk-heading-xl">Aj vy môžete zlepšiť štátne elektronické služby</h1>
+        <p class="snd-hero-description govuk-body-l">Tu môžete upozorniť na problémy štátnych elektronických služieb, alebo zadať návrhy na ich zlepšenie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper">
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters govuk-!-padding-bottom-6">
+          <div class="sdn-thumbnail">
+  <div class="sdn-thumbnail-caption">
+    <h2 class="govuk-heading-m">Nefungovali vám správne e-služby, máte nápad?</h2>
+    <p class="govuk-body">
+     Našli ste chybu? Máte nápad ako ich vylepšiť? Ukážme spoločne, kde je priestor na zlepšenie.
+    </p>
+  </div>
+  <div class="sdn-thumbnail-btn">
+    <a href="/form.html" role="button" draggable="false" class="govuk-button govuk-button--start">
+      Zaslať podnet
+    </a>
+  </div>
+</div>
+        </div>
+      </div>
+
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-heading-m">Čo aktuálne riešime</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Podnet</th>
+            <th class="govuk-table__header govuk-table__header--numeric" scope="col">Kategória</th>
+            <th class="govuk-table__header govuk-table__header--numeric" scope="col">Dátum</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body" id="listing"></tbody>
+      </table>
+
+      
+  
+    
+  
+
+<a href="/" role="button" draggable="false" class="govuk-button">
+  Zobraziť viac
+</a>
+
+
+      <script>function search() {
+  var searchURL = "https://lepsiesluzby.sk/jira/rest/api/2/search?jql=project%20%3D%20SDM%20%20AND%20component%20%3D%20e-services%20ORDER%20BY%20created%20DESC&fields=summary,created,customfield_10204&maxResults=5";
+
+  var categoryName = function categoryName(issue) {
+    if (issue && issue.fields && issue.fields.customfield_10204) {
+      if (issue.fields.customfield_10204.child) {
+        return "".concat(issue.fields.customfield_10204.value, " - ").concat(issue.fields.customfield_10204.child.value);
+      } else {
+        return "".concat(issue.fields.customfield_10204.value);
+      }
+    }
+
+    return "";
+  };
+
+  var createTableHtml = function createTableHtml(_ref) {
+    var summary = _ref.summary,
+        category = _ref.category,
+        date = _ref.date;
+    var dateObj = new Date(date);
+    var niceDate = "".concat(dateObj.getDate(), ". ").concat(dateObj.getMonth() + 1, ". ").concat(dateObj.getFullYear());
+    return "<tr class=\"govuk-table__row\">\n              <th class=\"govuk-table__header\" scope=\"row\">".concat(summary, "</th>\n              <td class=\"govuk-table__cell govuk-table__cell--numeric\">").concat(category, "</td>\n              <td class=\"govuk-table__cell govuk-table__cell--numeric\">").concat(niceDate, "</td>\n            </tr>");
+  };
+
+  var table = document.getElementById('listing');
+
+  var appendToTable = function appendToTable(html) {
+    table.insertAdjacentHTML('beforeend', html);
+  };
+
+  var searchSuccess = function searchSuccess(response) {
+    response.json().then(function (data) {
+      return data.issues.map(function (issue) {
+        return {
+          url: issue.self,
+          summary: issue.fields.summary,
+          category: categoryName(issue),
+          date: issue.fields.created
+        };
+      });
+    }).then(function (issues) {
+      issues.forEach(function (issue) {
+        return appendToTable(createTableHtml(issue));
+      });
+    });
+  };
+
+  fetch(searchURL).then(searchSuccess);
+}
+
+search();</script>
+
+    </main>
+  </div>
+
+
+    </div>
+
+    <div class="navody-template__footer">
+
+      
+        
+
+<footer class="sdn-footer " role="contentinfo">
+  <div class="govuk-width-container ">
+    <div class="sdn-footer__container">
+      <div class="sdn-footer__newsletter">
+        <span class="sdn-footer__newsletter-heading">Novinky emailom <small class="sdn-footer__newsletter-heading-tooltip">(raz mesačne)</small></span>
+        <div id="newsletter-success" style="display: none">
+          <p>
+            <strong>Na Váš e-mail sme poslali potvrdzovaciu správu.</strong>
+            <br>
+            Ďakujeme za Váš záujem.
+          </p>
+        </div>
+        <form id="newsletter-form" action="" data-action="https://my.sendinblue.com/users/subscribeembed/js_id/29wti/id/4" method="post">
+          <div class="govuk-form-group sdn-footer__newsletter-form-group">
+            <input type="hidden" name="js_id" id="js_id" value="29wti">
+            <input type="hidden" name="listid" id="listid" value="4">
+            <input type="hidden" name="from_url" id="from_url" value="yes">
+            <input type="hidden" name="hdn_email_txt" id="hdn_email_txt" value="">
+            <input id="email-input" class="govuk-input sdn-footer__newsletter-input" name="email" placeholder="Zadajte emailovú adresu">
+            
+  
+    
+  
+
+<button type="submit" class="govuk-button sdn-footer__newsletter-button">
+  Prihlásiť
+</button>
+
+          </div>
+        </form>
+        <span class="sdn-footer__newsletter-disclaimer">Prihlásením dávam dobrovoľný súhlas OZ Slovensko.Digital na zasielanie bezplatného newslettera na mnou zadaný e-mail. Tento súhlas môžem kedykoľvek odvolať na <a href="mailto:kontakt@slovensko.digital" class="sdn-footer__link">kontakt@slovensko.digital</a>. Oboznámil(a) som sa s informáciami v sekcii <a href="#" class="sdn-footer__link">Ochrana osobných údajov</a>.</span>
+      </div>
+      <div class="sdn-footer__donate">
+        <span class="sdn-footer__heart-wrapper">
+          <span class="sdn-footer__heart"></span>
+        </span>
+        <span class="sdn-footer__donate-text">Páči sa vám čo pre vás robíme?<br><a href="https://slovensko.digital/dve-percenta#ako-poukazat" class="sdn-footer__link sdn-footer__donate-link">Podporte nás</a></span>
+      </div>
+    </div>
+  </div>
+  <div class="sdn-footer__bottom-container">
+    <div class="govuk-width-container">
+      <div class="sdn-footer__bottom-columns">
+        <div class="sdn-footer__links">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="sdn-footer__contact">
+          <div class="sdn-footer__contact-content">
+            <strong>Slovensko.Digital</strong><br>
+            Staré grunty 12, 841 04 Bratislava<br>
+            IČO: 50158635<br>
+            <a href="mailto:kontakt@slovensko.digital">kontakt@slovensko.digital</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+
+      
+
+      
+    </div>
+  </body>
+</html>
