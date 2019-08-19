@@ -421,7 +421,7 @@ var _default = {
       // TODO: Add validation, change customfields to be more general?
       var data = this.form;
       var cfStr = "customfield_";
-      var categoryStr = cfStr + this.form.categories.persona;
+      var categoryStr = cfStr + data.categories.persona;
       var output = {
         fields: (0, _defineProperty2.default)({
           project: {
@@ -430,17 +430,17 @@ var _default = {
           issuetype: {
             name: "Bug"
           },
-          summary: this.form.summary,
-          description: this.form.description,
+          summary: data.summary,
+          description: data.description,
           components: [{
             name: "e-services"
           }],
-          customfield_10200: this.form.email,
-          customfield_10116: this.form.name
+          customfield_10200: data.email,
+          customfield_10116: data.name
         }, categoryStr, {
-          value: this.form.categories.persona,
+          value: data.categories.persona,
           child: {
-            value: this.form.categories.field
+            value: data.categories.field
           }
         })
       };
