@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style lang="scss"scoped>
+<style lang="scss">
 // FIXME: I'm screaming
 .govuk-template__body {
     display: -webkit-box;
@@ -52,5 +52,8 @@ export default {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+}
+body {
+    margin: 0;
 }
 </style>

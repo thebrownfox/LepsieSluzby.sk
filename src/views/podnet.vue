@@ -18,6 +18,7 @@
                                 id="govuk-input-summary"
                                 name="govuk-input-summary"
                                 type="text"
+                                v-model="form.summary"
                             />
                         </div>
 
@@ -28,6 +29,7 @@
                                 id="govuk-textarea-description"
                                 name="govuk-textarea-description"
                                 rows="5"
+                                v-model="form.description"
                             ></textarea>
                         </div>
 
@@ -36,81 +38,11 @@
                                 Kategória
                                 <em>(nepovinné)</em>
                             </label>
-
-                            <select
-                                class="govuk-select govuk-!-width-one-third"
-                                id="select-category"
-                                name="select-category"
-                            >
-                                <option value="0">Žiadne</option>
-                                <option value="1">Občan</option>
-                                <option value="2" selected>Podnikateľ</option>
-                                <option value="3">Úradník</option>
-                            </select>
-
-                            <select
-                                class="govuk-select govuk-!-width-one-third"
-                                id="select-subcategory"
-                                name="select-subcategory"
-                            >
-                                <option value="0">Žiadne</option>
-                                <option value="1">Bývanie</option>
-                                <option value="2" selected>Financie</option>
-                                <option value="3">Zamestnanie</option>
-                            </select>
-
-                            <select
-                                class="govuk-select govuk-!-width-one-third"
-                                name="customfield_10204"
-                                id="customfield_10204"
-                            >
-                                <option class="default-option" value selected="selected">Žiadne</option>
-                                <option class="option-group-10203" value="10203">Občan</option>
-                                <option class="option-group-10204" value="10204">Podnikateľ</option>
-                                <option class="option-group-10205" value="10205">Úradník</option>
-                            </select>
-
-                            <select
-                                class="govuk-select govuk-!-width-one-third"
-                                name="customfield_10204:1"
-                                id="customfield_10204:1"
-                                tabindex="-1"
-                                title
-                            >
-                                <option class="option-group-10203" value>Žiadne</option>
-                                <option class="option-group-10203" value="10206">Bývanie</option>
-                                <option class="option-group-10203" value="10207">Financie</option>
-                                <option class="option-group-10203" value="10208">Zamestnanie</option>
-                                <option class="option-group-10203" value="10209">Obrana a Bezpečnosť</option>
-                                <option class="option-group-10203" value="10210">Cestovanie</option>
-                                <option class="option-group-10203" value="10211">Kultúra</option>
-                                <option class="option-group-10203" value="10212">Rodina a Vzťahy</option>
-                                <option class="option-group-10203" value="10213">Zdravie</option>
-                                <option class="option-group-10203" value="10214">Doprava</option>
-                                <option class="option-group-10203" value="10215">Občan a štát</option>
-                                <option class="option-group-10203" value="10216">Vzdelanie a šport</option>
-                                <option class="option-group-10203" value="10217">Životné prostredie</option>
-
-                                <option class="option-group-10204" value>Žiadne</option>
-                                <option
-                                    class="option-group-10204"
-                                    value="10218"
-                                >Administratívny a ekonomický chod</option>
-                                <option
-                                    class="option-group-10204"
-                                    value="10220"
-                                >Zodpovedné podnikanie</option>
-                                <option class="option-group-10204" value="10221">Duševné vlastníctvo</option>
-                                <option
-                                    class="option-group-10204"
-                                    value="10222"
-                                >Ukončenie podnikania</option>
-                                <option class="option-group-10204" value="10223">Podnikanie</option>
-                                <option class="option-group-10204" value="10224">Začatie podnikania</option>
-
-                                <option class="option-group-10205" value>Žiadne</option>
-                                <option class="option-group-" value>Žiadne</option>
-                            </select>
+                            <nd-select
+                                v-model="form.categories.persona"
+                                :options="categories.persona"
+                            ></nd-select>
+                            <nd-select v-model="form.categories.field" :options="subCategories"></nd-select>
                         </div>
 
                         <div class="govuk-form-group">
@@ -123,6 +55,9 @@
                                 id="file-upload"
                                 name="file-upload"
                                 type="file"
+                                ref="files"
+                                multiple
+                                @change="fileUpload"
                             />
                         </div>
 
@@ -133,6 +68,7 @@
                                 id="govuk-input-name"
                                 name="govuk-input-name"
                                 type="text"
+                                v-model="form.name"
                             />
                         </div>
 
@@ -143,10 +79,11 @@
                                 id="govuk-input-email"
                                 name="govuk-input-email"
                                 type="text"
+                                v-model="form.email"
                             />
                         </div>
 
-                        <button type="submit" class="govuk-button">Vytvoriť</button>
+                        <button class="govuk-button" @click.prevent="submitForm">Vytvoriť</button>
                     </fieldset>
                 </form>
             </div>
@@ -155,7 +92,227 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            token: "tokenlolo",
+            form: {
+                categories: {
+                    persona: null,
+                    field: null
+                },
+                summary: "",
+                description: "",
+                files: null,
+                name: "",
+                email: ""
+            },
+            categories: {
+                persona: [
+                    {
+                        text: "Žiadne",
+                        value: null
+                    },
+                    {
+                        text: "Občan",
+                        value: 10203,
+                        options: [
+                            {
+                                text: "Žiadne",
+                                value: null
+                            },
+                            {
+                                text: "Bývanie",
+                                value: 10206
+                            },
+                            {
+                                text: "Financie",
+                                value: 10207
+                            },
+                            {
+                                text: "Zamestnanie",
+                                value: 10208
+                            },
+                            {
+                                text: "Obrana a Bezpečnosť",
+                                value: 10209
+                            },
+                            {
+                                text: "Cestovanie",
+                                value: 10210
+                            },
+                            {
+                                text: "Kultúra",
+                                value: 10211
+                            },
+                            {
+                                text: "Rodina a Vzťahy",
+                                value: 10212
+                            },
+                            {
+                                text: "Zdravie",
+                                value: 10213
+                            },
+                            {
+                                text: "Doprava",
+                                value: 10214
+                            },
+                            {
+                                text: "Občan a štát",
+                                value: 10215
+                            },
+                            {
+                                text: "Vzdelanie a šport",
+                                value: 10216
+                            },
+                            {
+                                text: "Životné prostredie",
+                                value: 10217
+                            }
+                        ]
+                    },
+                    {
+                        text: "Podnikateľ",
+                        value: 10204,
+                        options: [
+                            {
+                                text: "Žiadne",
+                                value: null
+                            },
+                            {
+                                text: "Administratívny a ekonomický chod",
+                                value: 10218
+                            },
+                            {
+                                text: "Zodpovedné podnikanie",
+                                value: 10220
+                            },
+                            {
+                                text: "Duševné vlastníctvo",
+                                value: 10221
+                            },
+                            {
+                                text: "Ukončenie podnikania",
+                                value: 10222
+                            },
+                            {
+                                text: "Podnikanie",
+                                value: 10223
+                            },
+                            {
+                                text: "Začatie podnikania",
+                                value: 10224
+                            }
+                        ]
+                    },
+                    {
+                        text: "Úradník",
+                        value: 10205,
+                        options: [
+                            {
+                                text: "Žiadne",
+                                value: null
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+    },
+    computed: {
+        subCategories: function() {
+            let options = [
+                {
+                    text: "Žiadne",
+                    value: null
+                }
+            ];
+            let persona = this.form.categories.persona;
+            if (persona) {
+                let index = this.categories.persona.findIndex(
+                    category => category.value == persona
+                );
+                options = this.categories.persona[index].options;
+            }
+            return options;
+        }
+    },
+    methods: {
+        //TODO: Fileupload component
+        fileUpload: function(event) {
+            let uploadedFiles = this.$refs.files.files;
+            if (this.form.files === null) {
+                this.form.files = [];
+            }
+            for (var i = 0; i < uploadedFiles.length; i++) {
+                this.form.files.push(uploadedFiles[i]);
+            }
+        },
+        postData: async function(inputData) {
+            const postURL = "https://lepsiesluzby.sk/jira/rest/api/2/issue";
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "recaptcha-token": this.token
+                }
+            };
+            try {
+                const post = await this.axios.post(postURL, inputData, config);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        submitForm: function() {
+            // TODO: Add validation, change customfields to be more general?
+            let data = this.form;
+            let cfStr ="customfield_"
+            let categoryStr = cfStr + this.form.categories.persona;
+            const output = {
+                fields: {
+                    project: {
+                        key: "SDM"
+                    },
+                    issuetype: {
+                        name: "Bug"
+                    },
+                    summary: this.form.summary,
+                    description: this.form.description,
+                    components: [
+                        {
+                            name: "e-services"
+                        }
+                    ],
+                    customfield_10200: this.form.email,
+                    customfield_10116: this.form.name,
+                    [categoryStr]: {
+                        value: this.form.categories.persona,
+                        child: {
+                            value: this.form.categories.field
+                        }
+                    }
+                }
+            };
+
+            this.postData(output);
+        },
+        getToken: function(loaded) {
+            if (loaded) {
+                this.$recaptcha("login").then(token => {
+                    this.token = token;
+                });
+            }
+        }
+    },
+    mounted() {
+        let loaded = false;
+        this.$recaptchaLoaded().then(() => {
+            loaded = true;
+            this.getToken(loaded);
+        });
+    }
+};
 </script>
 
 <style>

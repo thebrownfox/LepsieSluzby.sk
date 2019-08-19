@@ -9,12 +9,17 @@
                     v-for="(header, index) in data.head"
                     :key="index"
                     scope="col"
-                >{{ header.title}}</th>
+                >{{ header.text }}</th>
             </tr>
         </thead>
         <tbody class="govuk-table__body" id="listing">
             <tr class="govuk-table__row" v-for="(row, index) in data.body" :key="index">
-                <td class="govuk-table__cell" :class="{'govuk-table__cell--numeric': cell.type === Number}" v-for="(cell, index) in row" :key="index"></td>
+                <td
+                    class="govuk-table__cell"
+                    :class="{'govuk-table__cell--numeric': cell.type === Number}"
+                    v-for="(cell, index) in row.data"
+                    :key="index"
+                >{{ cell }}</td>
             </tr>
         </tbody>
     </table>
@@ -30,14 +35,14 @@ export default {
         options: {
             type: Object,
             default: () => ({
-                caption: "",
+                caption: ""
             })
         },
         data: {
             type: Object,
             default: () => ({
                 head: [],
-                body: [],
+                body: []
             })
         }
     }

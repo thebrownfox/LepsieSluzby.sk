@@ -28,21 +28,80 @@ export default {
     },
     computed: {
         tableData: function() {
-            let data = this.jiraData;
+            let jiraData = this.jiraData;
+            let table = {
+                head: [
+                    {
+                        type: null,
+                        text: "Podnet"
+                    },
+                    {
+                        type: null,
+                        text: "Kategória"
+                    },
+                    {
+                        type: null,
+                        text: "Dátum"
+                    }
+                ],
+                body: []
+            };
+            if (jiraData) {
+                // FIXME: the customfield is hardcoded
+                const categoryName = issue => {
+                    if (
+                        issue &&
+                        issue.fields &&
+                        issue.fields.customfield_10204
+                    ) {
+                        if (issue.fields.customfield_10204.child) {
+                            return `${issue.fields.customfield_10204.value} - ${issue.fields.customfield_10204.child.value}`;
+                        } else {
+                            return `${issue.fields.customfield_10204.value}`;
+                        }
+                    }
+                    return "";
+                };
+
+                const niceDate = date => {
+                    const dateObj = new Date(date);
+                    return `${dateObj.getDate()}. ${dateObj.getMonth() +
+                        1}. ${dateObj.getFullYear()}`;
+                };
+
+                jiraData.data.issues.forEach(issue => {
+                    let row = {
+                        url: issue.self,
+                        data: {
+                            summary: issue.fields.summary,
+                            category: categoryName(issue),
+                            date: niceDate(issue.fields.created)
+                        }
+                    };
+
+                    table.body.push(row);
+                });
+            }
+            return table;
         }
     },
     methods: {
-        getJiraData: function() {
-            const searchURL =
-                "https://lepsiesluzby.sk/jira/rest/api/2/search?jql=project%20%3D%20SDM%20%20AND%20component%20%3D%20e-services%20ORDER%20BY%20created%20DESC&fields=summary,created,customfield_10204&maxResults=5";
-            let jiraData;
+        getJiraData: async function() {
+            const searchURL = "https://lepsiesluzby.sk/jira/rest/api/2/search";
+            const params = {
+                jql:
+                    "project = SDM  AND component = e-services ORDER BY created DESC",
+                fields: "summary,created,customfield_10204",
+                maxResults: "5"
+            };
 
+            const response = await this.axios.get(searchURL, { params });
 
-            return jiraData;
+            return response;
         }
     },
-    mounted: function() {
-        this.jiraData = getJiraData();
+    mounted: async function() {
+        this.jiraData = await this.getJiraData();
     }
 };
 </script>
