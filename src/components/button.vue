@@ -1,5 +1,5 @@
 <template>
-    <button class="govuk-button"><slot></slot></button>
+    <button type="button" class="govuk-button"><slot></slot></button>
 </template>
 
 <script>

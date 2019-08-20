@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"views/not_found.vue":[function(require,module,exports) {
+})({"views/success.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -128,23 +128,93 @@ exports.default = void 0;
 //
 //
 //
-var _default = {};
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {};
+  }
+};
 exports.default = _default;
-        var $62048e = exports.default || module.exports;
+        var $33613b = exports.default || module.exports;
       
-      if (typeof $62048e === 'function') {
-        $62048e = $62048e.options;
+      if (typeof $33613b === 'function') {
+        $33613b = $33613b.options;
       }
     
         /* template */
-        Object.assign($62048e, (function () {
+        Object.assign($33613b, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "govuk-width-container" }, [
+        _c("main", { staticClass: "govuk-main-wrapper" }, [
+          _c("div", { staticClass: "govuk-grid-row" }, [
+            _c("div", { staticClass: "govuk-grid-column text-center" }, [
+              _c("img", {
+                attrs: {
+                  src: "/srdce_slovensko_digital.e7fbf56c.png",
+                  alt: "SD srdce"
+                }
+              }),
+              _vm._v(" "),
+              _c("h1", { staticClass: "sd-heading-l" }, [
+                _vm._v(
+                  "\n                        Je to malý krok pre teba,\n                        "
+                ),
+                _c("br"),
+                _vm._v("no veľký krok pre Slovensko\n                    ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                        Tvoj čin neostane nepovšimnutý.\n                        "
+                ),
+                _c("br"),
+                _vm._v("Tvoje deti ti budú ďakovať.\n                        "),
+                _c("br"),
+                _vm._v(
+                  "Tvoje vnúčatá ti budú ďakovať.\n                        "
+                ),
+                _c("br"),
+                _vm._v(
+                  "Aj starosta Hornej Dolnej ti ďakuje...\n                    "
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
           return {
@@ -164,9 +234,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$62048e', $62048e);
+            api.createRecord('$33613b', $33613b);
           } else {
-            api.reload('$62048e', $62048e);
+            api.reload('$33613b', $33613b);
           }
         }
 
@@ -177,7 +247,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"/home/foxie/Dokumenty/Code/SD/Lepšie_služby/src/assets/images/srdce_slovensko_digital.png":[["srdce_slovensko_digital.e7fbf56c.png","assets/images/srdce_slovensko_digital.png"],"assets/images/srdce_slovensko_digital.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -380,5 +450,122 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/not_found.70b04d9f.js.map
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-loader.js":[function(require,module,exports) {
+var getBundleURL = require('./bundle-url').getBundleURL;
+
+function loadBundlesLazy(bundles) {
+  if (!Array.isArray(bundles)) {
+    bundles = [bundles];
+  }
+
+  var id = bundles[bundles.length - 1];
+
+  try {
+    return Promise.resolve(require(id));
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      return new LazyPromise(function (resolve, reject) {
+        loadBundles(bundles.slice(0, -1)).then(function () {
+          return require(id);
+        }).then(resolve, reject);
+      });
+    }
+
+    throw err;
+  }
+}
+
+function loadBundles(bundles) {
+  return Promise.all(bundles.map(loadBundle));
+}
+
+var bundleLoaders = {};
+
+function registerBundleLoader(type, loader) {
+  bundleLoaders[type] = loader;
+}
+
+module.exports = exports = loadBundlesLazy;
+exports.load = loadBundles;
+exports.register = registerBundleLoader;
+var bundles = {};
+
+function loadBundle(bundle) {
+  var id;
+
+  if (Array.isArray(bundle)) {
+    id = bundle[1];
+    bundle = bundle[0];
+  }
+
+  if (bundles[bundle]) {
+    return bundles[bundle];
+  }
+
+  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
+  var bundleLoader = bundleLoaders[type];
+
+  if (bundleLoader) {
+    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
+      if (resolved) {
+        module.bundle.register(id, resolved);
+      }
+
+      return resolved;
+    }).catch(function (e) {
+      delete bundles[bundle];
+      throw e;
+    });
+  }
+}
+
+function LazyPromise(executor) {
+  this.executor = executor;
+  this.promise = null;
+}
+
+LazyPromise.prototype.then = function (onSuccess, onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.then(onSuccess, onError);
+};
+
+LazyPromise.prototype.catch = function (onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.catch(onError);
+};
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],0:[function(require,module,exports) {
+var b=require("../node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.load([]).then(function(){require("views/success.vue");});
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
+//# sourceMappingURL=/success.2ccba5a2.js.map

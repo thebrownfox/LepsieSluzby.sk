@@ -248,7 +248,10 @@ var _default = {
       }
 
       return getJiraData;
-    }()
+    }(),
+    openJira: function openJira() {
+      window.open("https://lepsiesluzby.sk/jira/secure/Dashboard.jspa?selectPageId=10100", "_blank");
+    }
   },
   mounted: function () {
     var _mounted = (0, _asyncToGenerator2.default)(
@@ -318,7 +321,17 @@ exports.default = _default;
               attrs: { data: _vm.tableData, options: _vm.tableOptions }
             }),
             _vm._v(" "),
-            _c("nd-button", [_vm._v("Zobraziť viac")])
+            _c(
+              "nd-button",
+              {
+                nativeOn: {
+                  click: function($event) {
+                    return _vm.openJira()
+                  }
+                }
+              },
+              [_vm._v("Zobraziť viac")]
+            )
           ],
           1
         )
@@ -386,9 +399,9 @@ var checkedAssets, assetsToAccept;
 var parent = module.bundle.parent;
 
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-  var hostname = "" || location.hostname;
+  var hostname = "lepsiesluzby.sk" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44691" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34507" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

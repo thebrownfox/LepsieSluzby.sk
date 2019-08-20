@@ -17,7 +17,6 @@
                     </div>
                     <form
                         id="newsletter-form"
-                        action="newsletterFormUrl"
                         data-action="https://my.sendinblue.com/users/subscribeembed/js_id/29wti/id/4"
                         method="post"
                     >
@@ -32,7 +31,7 @@
                                 name="email"
                                 placeholder="Zadajte emailovú adresu"
                             />
-                            <nd-button class="sdn-footer__newsletter-button">Prihlásiť</nd-button>
+                            <nd-button type="submit" class="sdn-footer__newsletter-button">Prihlásiť</nd-button>
                         </div>
                     </form>
                     <span class="sdn-footer__newsletter-disclaimer">
@@ -111,7 +110,17 @@ export default {
         }
     },
     methods: {
-        newsletterFormUrl: function() {}
+        newsletterSubmit: async function(submitEvent) {
+            const api = "https://my.sendinblue.com/users/subscribeembed/js_id/29wti/id/4";
+//FormData
+// js_id: 29wti
+// listid: 4
+// from_url: yes
+// hdn_email_txt: 
+// email: marek.brencic.sxe@gmail.com
+
+            let post = this.axios.post();
+        }
     },
     computed: {
         params: function() {

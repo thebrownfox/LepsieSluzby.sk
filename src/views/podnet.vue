@@ -261,6 +261,7 @@ export default {
             try {
                 const post = await this.axios.post(postURL, inputData, config);
                 // TODO: Add files support here
+                this.$router.push("success");
             } catch (error) {
                 console.log(error);
             }
@@ -268,8 +269,8 @@ export default {
         submitForm: function() {
             // TODO: Add validation, change customfields to be more general?
             let data = this.form;
-            let cfStr ="customfield_";
-            
+            let cfStr = "customfield_";
+
             let categoryStr = cfStr + data.categories.persona;
             const output = {
                 fields: {
@@ -287,16 +288,17 @@ export default {
                         }
                     ],
                     customfield_10200: data.email,
-                    customfield_10116: data.name,
-                    [categoryStr]: {
-                        value: data.categories.persona,
-                        child: {
-                            value: data.categories.field
-                        }
-                    }
+                    customfield_10116: data.name
                 }
             };
-
+            if (data.categories.persona) {
+                output.fields[categoryStr] = {
+                    value: data.categories.persona,
+                    child: {
+                        value: data.categories.field
+                    }
+                };
+            }
             this.postData(output);
         },
         getToken: function(loaded) {

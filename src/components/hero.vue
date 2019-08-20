@@ -19,5 +19,8 @@
 export default {};
 </script>
 
-<style>
+<style lang="scss">
+.sdn-hero {
+    background: linear-gradient(110.8deg, #332ebe 1.22%, #5891eb 97.65%);
+}
 </style>

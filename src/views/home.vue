@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <nd-table :data="tableData" :options="tableOptions"></nd-table>
-                <nd-button>Zobraziť viac</nd-button>
+                <nd-button @click.native="openJira()">Zobraziť viac</nd-button>
             </main>
         </div>
     </div>
@@ -98,6 +98,12 @@ export default {
             const response = await this.axios.get(searchURL, { params });
 
             return response;
+        },
+        openJira: function() {
+            window.open(
+                "https://lepsiesluzby.sk/jira/secure/Dashboard.jspa?selectPageId=10100",
+                "_blank"
+            );
         }
     },
     mounted: async function() {

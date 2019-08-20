@@ -117,32 +117,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/@babel/runtime/helpers/defineProperty.js":[function(require,module,exports) {
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty;
-},{}],"views/podnet.vue":[function(require,module,exports) {
+})({"views/podnet.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -395,20 +376,22 @@ var _default = {
 
               case 5:
                 post = _context.sent;
-                _context.next = 11;
+                // TODO: Add files support here
+                this.$router.push("success");
+                _context.next = 12;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[2, 8]]);
+        }, _callee, this, [[2, 9]]);
       }));
 
       function postData(_x) {
@@ -423,7 +406,7 @@ var _default = {
       var cfStr = "customfield_";
       var categoryStr = cfStr + data.categories.persona;
       var output = {
-        fields: (0, _defineProperty2.default)({
+        fields: {
           project: {
             key: "SDM"
           },
@@ -437,13 +420,18 @@ var _default = {
           }],
           customfield_10200: data.email,
           customfield_10116: data.name
-        }, categoryStr, {
+        }
+      };
+
+      if (data.categories.persona) {
+        output.fields[categoryStr] = {
           value: data.categories.persona,
           child: {
             value: data.categories.field
           }
-        })
-      };
+        };
+      }
+
       this.postData(output);
     },
     getToken: function getToken(loaded) {
@@ -783,7 +771,7 @@ render._withStripped = true
       
       }
     })();
-},{"@babel/runtime/helpers/defineProperty":"../node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"../node_modules/@babel/runtime/helpers/asyncToGenerator.js","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"../node_modules/@babel/runtime/helpers/asyncToGenerator.js","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -809,9 +797,9 @@ var checkedAssets, assetsToAccept;
 var parent = module.bundle.parent;
 
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-  var hostname = "" || location.hostname;
+  var hostname = "lepsiesluzby.sk" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44691" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34507" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

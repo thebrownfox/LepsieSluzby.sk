@@ -6,9 +6,9 @@
         data-module="sdn-header"
     >
         <div class="sdn-header__container govuk-width-container sdn-header__container--logo">
-            <router-link :to="(params.homepageUrl)" class="sdn-header__link">
-                <img v-if="params.productLogo" :src="params.productLogo" :alt="params.productName" />
-                <span v-else class="sdn-header__product-name">{{ params.productName }}</span>
+            <router-link id="logo-home" :to="(params.homepageUrl)" class="sdn-header__link">
+                <span class="sdn-header__product-name">{{ params.productName }}</span>
+                <slot name="logo"></slot>
             </router-link>
             <div v-if="params.navigation" class="sdn-header__content">
                 <button
@@ -44,6 +44,7 @@
                                 class="sdn-header__link"
                                 :class="{'sdn-header__link--active':item.active}"
                                 :href="item.href"
+                                target="_blank"
                             >{{ item.text }}</a>
                         </li>
                     </ul>
@@ -80,5 +81,32 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.sdn-header {
+    border-bottom: none;
+    background: linear-gradient(156.71deg, #332ebe 1.22%, #5891eb 97.65%);
+}
+.sdn-header__container {
+    height: 60px;
+}
+.sdn-header__navigation > li + li:before {
+    border: none;
+}
+.sdn-header__product-name {
+    font-family: "Source Sans Pro", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+
+    color: #ffffff;
+}
+#logo-home {
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 0.75rem;
+}
+a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after {
+    display: none;
+}
 </style>
