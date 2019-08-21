@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build src/index.html --public-url ./",
+    "build": "parcel build src/index.html --no-minify",
+    "script": "find . -name 'index.html' -exec sed -i -e 's/http:\\/\\/localhost:8000//g' {} \\; ",
     "dev": "parcel src/index.html --port 3000"
   },
   "keywords": [],
@@ -24,7 +25,6 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-vue": "^5.2.3",
     "parcel-bundler": "^1.12.3",
-    "parcel-plugin-prerender": "^1.4.1",
     "prettier": "1.18.2",
     "sass": "^1.22.9",
     "vue-template-compiler": "^2.6.10"
