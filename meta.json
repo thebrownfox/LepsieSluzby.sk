@@ -1,0 +1,539 @@
+{
+    "expand": "projects",
+    "projects": [
+        {
+            "expand": "issuetypes",
+            "self": "https://lepsiesluzby.sk/jira/rest/api/2/project/10000",
+            "id": "10000",
+            "key": "SDM",
+            "name": "Slovensko Digital Requests",
+            "avatarUrls": {
+                "48x48": "https://lepsiesluzby.sk/jira/secure/projectavatar?avatarId=10324",
+                "24x24": "https://lepsiesluzby.sk/jira/secure/projectavatar?size=small&avatarId=10324",
+                "16x16": "https://lepsiesluzby.sk/jira/secure/projectavatar?size=xsmall&avatarId=10324",
+                "32x32": "https://lepsiesluzby.sk/jira/secure/projectavatar?size=medium&avatarId=10324"
+            },
+            "issuetypes": [
+                {
+                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/issuetype/10002",
+                    "id": "10002",
+                    "description": "A problem which impairs or prevents the functions of the product.",
+                    "iconUrl": "https://lepsiesluzby.sk/jira/secure/viewavatar?size=xsmall&avatarId=10541&avatarType=issuetype",
+                    "name": "Bug",
+                    "subtask": false,
+                    "expand": "fields",
+                    "fields": {
+                        "summary": {
+                            "required": true,
+                            "schema": {
+                                "type": "string",
+                                "system": "summary"
+                            },
+                            "name": "Summary",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "issuetype": {
+                            "required": false,
+                            "schema": {
+                                "type": "issuetype",
+                                "system": "issuetype"
+                            },
+                            "name": "Issue Type",
+                            "hasDefaultValue": false,
+                            "operations": [],
+                            "allowedValues": [
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/issuetype/10002",
+                                    "id": "10002",
+                                    "description": "A problem which impairs or prevents the functions of the product.",
+                                    "iconUrl": "https://lepsiesluzby.sk/jira/secure/viewavatar?size=xsmall&avatarId=10541&avatarType=issuetype",
+                                    "name": "Bug",
+                                    "subtask": false,
+                                    "avatarId": 10541
+                                }
+                            ]
+                        },
+                        "components": {
+                            "required": false,
+                            "schema": {
+                                "type": "array",
+                                "items": "component",
+                                "system": "components"
+                            },
+                            "name": "Component/s",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "add",
+                                "set",
+                                "remove"
+                            ],
+                            "allowedValues": [
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/component/10101",
+                                    "id": "10101",
+                                    "name": "e-services"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/component/10100",
+                                    "id": "10100",
+                                    "name": "Návody.Digital"
+                                }
+                            ]
+                        },
+                        "description": {
+                            "required": false,
+                            "schema": {
+                                "type": "string",
+                                "system": "description"
+                            },
+                            "name": "Description",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "project": {
+                            "required": true,
+                            "schema": {
+                                "type": "project",
+                                "system": "project"
+                            },
+                            "name": "Project",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ],
+                            "allowedValues": [
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/project/10000",
+                                    "id": "10000",
+                                    "key": "SDM",
+                                    "name": "Slovensko Digital Requests",
+                                    "avatarUrls": {
+                                        "48x48": "https://lepsiesluzby.sk/jira/secure/projectavatar?avatarId=10324",
+                                        "24x24": "https://lepsiesluzby.sk/jira/secure/projectavatar?size=small&avatarId=10324",
+                                        "16x16": "https://lepsiesluzby.sk/jira/secure/projectavatar?size=xsmall&avatarId=10324",
+                                        "32x32": "https://lepsiesluzby.sk/jira/secure/projectavatar?size=medium&avatarId=10324"
+                                    }
+                                }
+                            ]
+                        },
+                        "customfield_10120": {
+                            "required": false,
+                            "schema": {
+                                "type": "string",
+                                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+                                "customId": 10120
+                            },
+                            "name": "Surname",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "reporter": {
+                            "required": false,
+                            "schema": {
+                                "type": "user",
+                                "system": "reporter"
+                            },
+                            "name": "Reporter",
+                            "autoCompleteUrl": "https://lepsiesluzby.sk/jira/rest/api/latest/user/search?username=",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "customfield_10110": {
+                            "required": false,
+                            "schema": {
+                                "type": "array",
+                                "items": "sd-customerorganization",
+                                "custom": "com.atlassian.servicedesk:sd-customer-organizations",
+                                "customId": 10110
+                            },
+                            "name": "Organizations",
+                            "autoCompleteUrl": "https://lepsiesluzby.sk/jira/rest/servicedesk/1/customer/organisations/project/10000/search?query=",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "add",
+                                "set",
+                                "remove"
+                            ]
+                        },
+                        "priority": {
+                            "required": false,
+                            "schema": {
+                                "type": "priority",
+                                "system": "priority"
+                            },
+                            "name": "Priority",
+                            "hasDefaultValue": true,
+                            "operations": [
+                                "set"
+                            ],
+                            "allowedValues": [
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/priority/1",
+                                    "iconUrl": "https://lepsiesluzby.sk/jira/images/icons/priorities/highest.svg",
+                                    "name": "Highest",
+                                    "id": "1"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/priority/2",
+                                    "iconUrl": "https://lepsiesluzby.sk/jira/images/icons/priorities/high.svg",
+                                    "name": "High",
+                                    "id": "2"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/priority/3",
+                                    "iconUrl": "https://lepsiesluzby.sk/jira/images/icons/priorities/medium.svg",
+                                    "name": "Medium",
+                                    "id": "3"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/priority/4",
+                                    "iconUrl": "https://lepsiesluzby.sk/jira/images/icons/priorities/low.svg",
+                                    "name": "Low",
+                                    "id": "4"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/priority/5",
+                                    "iconUrl": "https://lepsiesluzby.sk/jira/images/icons/priorities/lowest.svg",
+                                    "name": "Lowest",
+                                    "id": "5"
+                                }
+                            ]
+                        },
+                        "customfield_10200": {
+                            "required": false,
+                            "schema": {
+                                "type": "string",
+                                "custom": "ru.mail.jira.plugins.uniqueregexfield:unique-regex-cf",
+                                "customId": 10200
+                            },
+                            "name": "e-mail",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "customfield_10201": {
+                            "required": false,
+                            "schema": {
+                                "type": "string",
+                                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+                                "customId": 10201
+                            },
+                            "name": "Statement",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "customfield_10116": {
+                            "required": false,
+                            "schema": {
+                                "type": "string",
+                                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+                                "customId": 10116
+                            },
+                            "name": "Name",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "customfield_10204": {
+                            "required": false,
+                            "schema": {
+                                "type": "option-with-child",
+                                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:cascadingselect",
+                                "customId": 10204
+                            },
+                            "name": "Category",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ],
+                            "allowedValues": [
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10203",
+                                    "value": "Občan",
+                                    "id": "10203",
+                                    "children": [
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10206",
+                                            "value": "Bývanie",
+                                            "id": "10206"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10207",
+                                            "value": "Financie",
+                                            "id": "10207"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10208",
+                                            "value": "Zamestnanie",
+                                            "id": "10208"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10209",
+                                            "value": "Obrana a Bezpečnosť",
+                                            "id": "10209"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10210",
+                                            "value": "Cestovanie",
+                                            "id": "10210"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10211",
+                                            "value": "Kultúra",
+                                            "id": "10211"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10212",
+                                            "value": "Rodina a Vzťahy",
+                                            "id": "10212"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10213",
+                                            "value": "Zdravie",
+                                            "id": "10213"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10214",
+                                            "value": "Doprava",
+                                            "id": "10214"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10215",
+                                            "value": "Občan a štát",
+                                            "id": "10215"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10216",
+                                            "value": "Vzdelanie a šport",
+                                            "id": "10216"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10217",
+                                            "value": "Životné prostredie",
+                                            "id": "10217"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10204",
+                                    "value": "Podnikateľ",
+                                    "id": "10204",
+                                    "children": [
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10218",
+                                            "value": "Administratívny a ekonomický chod",
+                                            "id": "10218"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10220",
+                                            "value": "Zodpovedné podnikanie",
+                                            "id": "10220"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10221",
+                                            "value": "Duševné vlastníctvo",
+                                            "id": "10221"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10222",
+                                            "value": "Ukončenie podnikania",
+                                            "id": "10222"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10223",
+                                            "value": "Podnikanie",
+                                            "id": "10223"
+                                        },
+                                        {
+                                            "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10224",
+                                            "value": "Začatie podnikania",
+                                            "id": "10224"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10205",
+                                    "value": "Úradník",
+                                    "id": "10205"
+                                }
+                            ]
+                        },
+                        "customfield_10205": {
+                            "required": false,
+                            "schema": {
+                                "type": "option-with-child",
+                                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:cascadingselect",
+                                "customId": 10205
+                            },
+                            "name": "Institutions",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ],
+                            "allowedValues": [
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10300",
+                                    "value": "Ministerstvá",
+                                    "id": "10300"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10301",
+                                    "value": "Živnostenský register",
+                                    "id": "10301"
+                                }
+                            ]
+                        },
+                        "customfield_10118": {
+                            "required": false,
+                            "schema": {
+                                "type": "option",
+                                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+                                "customId": 10118
+                            },
+                            "name": "Life situation",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ],
+                            "allowedValues": [
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10013",
+                                    "value": "Iné",
+                                    "id": "10013"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10000",
+                                    "value": "Voľby do Európskeho parlamentu",
+                                    "id": "10000"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10001",
+                                    "value": "Poukázanie 2% z dane (zamestnanec)",
+                                    "id": "10001"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10002",
+                                    "value": "Odklad daňového priznania",
+                                    "id": "10002"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10003",
+                                    "value": "Svadba",
+                                    "id": "10003"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10004",
+                                    "value": "Aktivácia eID a elektronickej schránky",
+                                    "id": "10004"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10005",
+                                    "value": "Narodenie dieťaťa",
+                                    "id": "10005"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10006",
+                                    "value": "Poukázanie 2% z dane (ak si podávate daňové priznanie sami)",
+                                    "id": "10006"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10007",
+                                    "value": "Založenie s.r.o.",
+                                    "id": "10007"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10008",
+                                    "value": "Prepis vozidla – predošlý majiteľ",
+                                    "id": "10008"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10009",
+                                    "value": "Prepis vozidla – nový majiteľ",
+                                    "id": "10009"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10010",
+                                    "value": "Založenie živnosti",
+                                    "id": "10010"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10011",
+                                    "value": "Zmena trvalého bydliska",
+                                    "id": "10011"
+                                },
+                                {
+                                    "self": "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10012",
+                                    "value": "Strata dokladov",
+                                    "id": "10012"
+                                }
+                            ]
+                        },
+                        "attachment": {
+                            "required": false,
+                            "schema": {
+                                "type": "array",
+                                "items": "attachment",
+                                "system": "attachment"
+                            },
+                            "name": "Attachment",
+                            "hasDefaultValue": false,
+                            "operations": []
+                        },
+                        "duedate": {
+                            "required": false,
+                            "schema": {
+                                "type": "date",
+                                "system": "duedate"
+                            },
+                            "name": "Due Date",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "set"
+                            ]
+                        },
+                        "issuelinks": {
+                            "required": false,
+                            "schema": {
+                                "type": "array",
+                                "items": "issuelinks",
+                                "system": "issuelinks"
+                            },
+                            "name": "Linked Issues",
+                            "autoCompleteUrl": "https://lepsiesluzby.sk/jira/rest/api/2/issue/picker?currentProjectId=&showSubTaskParent=true&showSubTasks=true&currentIssueKey=null&query=",
+                            "hasDefaultValue": false,
+                            "operations": [
+                                "add"
+                            ]
+                        },
+                        "assignee": {
+                            "required": false,
+                            "schema": {
+                                "type": "user",
+                                "system": "assignee"
+                            },
+                            "name": "Assignee",
+                            "autoCompleteUrl": "https://lepsiesluzby.sk/jira/rest/api/latest/user/assignable/search?issueKey=null&username=",
+                            "hasDefaultValue": true,
+                            "operations": [
+                                "set"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
