@@ -42,7 +42,11 @@
                                 v-model="form.categories.persona"
                                 :options="categories.persona"
                             ></nd-select>
-                            <nd-select v-model="form.categories.field" :options="subCategories"></nd-select>
+                            <nd-select
+                                v-model="form.categories.field"
+                                :options="subCategories"
+                                v-if="subCategories.length > 0"
+                            ></nd-select>
                         </div>
 
                         <div class="govuk-form-group">
@@ -83,7 +87,11 @@
                             />
                         </div>
 
-                        <button class="govuk-button" @click.prevent="submitForm">Vytvoriť</button>
+                        <button
+                            class="govuk-button"
+                            @click.prevent="submitForm()"
+                            :disabled="hasSent"
+                        >Vytvoriť</button>
                     </fieldset>
                 </form>
             </div>
@@ -95,11 +103,12 @@
 export default {
     data() {
         return {
-            token: "tokenlolo",
+            token: "",
+            hasSent: false,
             form: {
                 categories: {
                     persona: "Žiadne",
-                    field: "Žiadne"
+                    field: null
                 },
                 summary: "",
                 description: "",
@@ -249,20 +258,18 @@ export default {
     },
     computed: {
         subCategories: function() {
-            let options = [
-                {
-                    value: "Žiadne",
-                    id: null
-                }
-            ];
+            // There have to be options
+            let options = [];
             let persona = this.form.categories.persona;
             if (persona && persona !== "Žiadne") {
                 let index = this.categories.persona.findIndex(
                     category => category.value == persona
                 );
-                options = options.concat(
-                    this.categories.persona[index].children
-                );
+                if (this.categories.persona[index].children) {
+                    options = options.concat(
+                        this.categories.persona[index].children
+                    );
+                }
             }
             return options;
         }
@@ -280,7 +287,7 @@ export default {
         },
         postData: async function(inputData) {
             const postURL = "https://lepsiesluzby.sk/jira/rest/api/2/issue";
-
+            const fileURL = "";
             const config = {
                 headers: {
                     "Content-Type": "application/json",
@@ -291,7 +298,14 @@ export default {
             try {
                 const post = await this.axios.post(postURL, inputData, config);
                 // TODO: Add files support here
-                this.$router.push("success");
+                if (this.form.files) {
+                    try {
+                    } catch (error) {
+                        console.log(error);
+                    }
+                } else {
+                    this.$router.push("success");
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -321,15 +335,26 @@ export default {
                     customfield_10116: data.name
                 }
             };
-            if (data.categories.persona) {
+            if (
+                data.categories.persona &&
+                data.categories.persona !== "Žiadne"
+            ) {
+                if (data.categories.field) {
+                    output.fields[categoryStr] = {
+                        value: data.categories.persona,
+                        child: {
+                            value: data.categories.field
+                        }
+                    };
+                }
+            } else {
                 output.fields[categoryStr] = {
-                    value: data.categories.persona,
-                    child: {
-                        value: data.categories.field
-                    }
+                    value: data.categories.persona
                 };
             }
+
             this.postData(output);
+            this.hasSent = true;
         },
         getToken: function(loaded) {
             if (loaded) {

@@ -27,7 +27,7 @@ export default {
     },
     data() {
         return {
-            selected: this.value
+            selected: this.options[0].value
         };
     },
     watch: {
