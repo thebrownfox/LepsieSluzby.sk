@@ -15,10 +15,12 @@
                             >Akú situáciu riešite? Krátky popis.</label>
                             <input
                                 class="govuk-input"
+                                :class="{'error-input': !valid.summary }"
                                 id="govuk-input-summary"
                                 name="govuk-input-summary"
                                 type="text"
                                 v-model="form.summary"
+                                @blur="valid.summary = validInput(form.summary, 'text')"
                             />
                         </div>
 
@@ -26,10 +28,12 @@
                             <label class="govuk-label" for="govuk-textarea-description">Text podnetu</label>
                             <textarea
                                 class="govuk-textarea"
+                                :class="{'error-input': !valid.description }"
                                 id="govuk-textarea-description"
                                 name="govuk-textarea-description"
                                 rows="5"
                                 v-model="form.description"
+                                @blur="valid.description = validInput(form.description, 'text')"
                             ></textarea>
                         </div>
 
@@ -78,10 +82,12 @@
                             </label>
                             <input
                                 class="govuk-input govuk-!-width-two-thirds"
+                                :class="{'error-input': !valid.email }"
                                 id="govuk-input-email"
                                 name="govuk-input-email"
                                 type="text"
                                 v-model="form.email"
+                                @blur="valid.email = form.email === '' || validInput(form.email, 'email')"
                             />
                         </div>
 
@@ -131,6 +137,12 @@ export default {
                 files: [],
                 name: "",
                 email: ""
+            },
+            valid: {
+                // True at the begining for the scss class
+                description: true,
+                summary: true,
+                email: true
             },
             categories: {
                 persona: [
@@ -275,10 +287,16 @@ export default {
     computed: {
         isValidForm: function() {
             let validity = false;
+            // This disables the button if email is not it the right form
+            let email = true;
+            if (this.form.email !== "") {
+                email = this.validInput(this.form.email, "email");
+            }
 
             if (
                 this.validInput(this.form.summary, "text") &&
-                this.validInput(this.form.description, "text")
+                this.validInput(this.form.description, "text") &&
+                email
             ) {
                 validity = true;
             }
@@ -372,7 +390,7 @@ export default {
                     this.$router.push("success");
                 }
             } catch (error) {
-                this.$router.push({ name: 'error', params: {data: error }});
+                this.$router.push({ name: "error", params: { data: error } });
                 console.log(error);
             }
         },
@@ -444,5 +462,8 @@ export default {
         font-size: 1rem;
         width: 75%;
     }
+}
+.error-input {
+    outline: 3px solid red;
 }
 </style>
