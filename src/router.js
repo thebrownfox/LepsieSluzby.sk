@@ -9,6 +9,7 @@ const NotFound = () => import("./views/not_found.vue");
 const home = () => import("./views/home.vue");
 const podnet = () => import("./views/podnet.vue");
 const success = () => import("./views/success.vue");
+const error = () => import("./views/error.vue");
 
 
 export default new Router({
@@ -32,6 +33,12 @@ export default new Router({
         {
             path: "/success",
             component: success,
+        },
+        {
+            path: "/error",
+            name: "error",
+            component: error,
+            props: true
         },
     ],
 });

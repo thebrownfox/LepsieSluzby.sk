@@ -112,5 +112,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.govuk-table__cell {
+    max-width: 50ch;
+}
 </style>

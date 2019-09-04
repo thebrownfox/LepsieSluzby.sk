@@ -58,7 +58,10 @@
                         </div>
 
                         <div class="govuk-form-group">
-                            <label class="govuk-label" for="govuk-input-name">Meno</label>
+                            <label class="govuk-label" for="govuk-input-name">
+                                Meno
+                                <em>(nepovinné)</em>
+                            </label>
                             <input
                                 class="govuk-input govuk-!-width-two-thirds"
                                 id="govuk-input-name"
@@ -69,7 +72,10 @@
                         </div>
 
                         <div class="govuk-form-group">
-                            <label class="govuk-label" for="govuk-input-email">E-mail</label>
+                            <label class="govuk-label" for="govuk-input-email">
+                                E-mail
+                                <em>(nepovinné)</em>
+                            </label>
                             <input
                                 class="govuk-input govuk-!-width-two-thirds"
                                 id="govuk-input-email"
@@ -82,11 +88,15 @@
                         <button
                             class="govuk-button"
                             @click.prevent="submitForm()"
-                            :disabled="hasSent || (!gdpr )"
+                            :disabled="hasSent || (!gdpr || !isValidForm)"
                         >Vytvoriť</button>
                         <div class="govuk-checkboxes suhlas">
                             <div class="govuk-checkboxes__item">
-                                <input v-model="gdpr" class="govuk-checkboxes__input" type="checkbox" />
+                                <input
+                                    v-model="gdpr"
+                                    class="govuk-checkboxes__input"
+                                    type="checkbox"
+                                />
                                 <label class="govuk-label govuk-checkboxes__label">
                                     Súhlasím so spracovaním osobných údajov v súlade s nariadením
                                     <a
@@ -109,7 +119,7 @@ export default {
     data() {
         return {
             token: "",
-            gdpr:false,
+            gdpr: false,
             hasSent: false,
             form: {
                 categories: {
@@ -263,6 +273,17 @@ export default {
         };
     },
     computed: {
+        isValidForm: function() {
+            let validity = false;
+
+            if (
+                this.validInput(this.form.summary, "text") &&
+                this.validInput(this.form.description, "text")
+            ) {
+                validity = true;
+            }
+            return validity;
+        },
         subCategories: function() {
             // There have to be options
             let options = [];
@@ -281,6 +302,25 @@ export default {
         }
     },
     methods: {
+        validInput: function(value, type) {
+            let answer = false;
+            let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            switch (type) {
+                case "email":
+                    answer = regEmail.test(value);
+                    break;
+                case "text":
+                    if (value !== "") {
+                        answer = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return answer;
+        },
         logout: async function() {
             const logoutURL =
                 "https://lepsiesluzby.sk/jira/rest/auth/1/session";
@@ -302,7 +342,6 @@ export default {
             };
             try {
                 const post = await this.axios.post(postURL, inputData, config);
-                // TODO: Add files support here
                 if (this.form.files && post) {
                     try {
                         const attachmentURL =
@@ -333,6 +372,7 @@ export default {
                     this.$router.push("success");
                 }
             } catch (error) {
+                this.$router.push({ name: 'error', params: {data: error }});
                 console.log(error);
             }
         },
@@ -373,10 +413,6 @@ export default {
                         }
                     };
                 }
-            } else {
-                output.fields[categoryStr] = {
-                    value: data.categories.persona
-                };
             }
 
             this.postData(output);

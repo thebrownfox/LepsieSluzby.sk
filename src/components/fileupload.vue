@@ -63,7 +63,6 @@ export default {
         addFiles: function() {
             this.$refs.files.click();
         },
-        //TODO: Fileupload component
         insertFile: function(event) {
             let uploadedFiles = this.$refs.files.files;
 
@@ -73,11 +72,12 @@ export default {
                     this.maxSize
                 ) {
                     //TODO: Vypis chybovu hlasku
+                    
                 } else {
                     this.files.push(uploadedFiles[i]);
                 }
             }
-            
+
             this.$emit("file", this.newFiles);
         },
         removeFile: function(index) {
