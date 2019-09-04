@@ -41,8 +41,9 @@
                             class="sdn-footer__link"
                         >kontakt@slovensko.digital</a>. Oboznámil(a) som sa s informáciami v sekcii
                         <a
-                            href="#"
+                            href="https://slovensko.digital/ochrana-osobnych-udajov "
                             class="sdn-footer__link"
+                            target="_blank"
                         >Ochrana osobných údajov</a>.
                     </span>
                 </div>
@@ -111,13 +112,14 @@ export default {
     },
     methods: {
         newsletterSubmit: async function(submitEvent) {
-            const api = "https://my.sendinblue.com/users/subscribeembed/js_id/29wti/id/4";
-//FormData
-// js_id: 29wti
-// listid: 4
-// from_url: yes
-// hdn_email_txt: 
-// email: marek.brencic.sxe@gmail.com
+            const api =
+                "https://my.sendinblue.com/users/subscribeembed/js_id/29wti/id/4";
+            //FormData
+            // js_id: 29wti
+            // listid: 4
+            // from_url: yes
+            // hdn_email_txt:
+            // email: marek.brencic.sxe@gmail.com
 
             let post = this.axios.post();
         }

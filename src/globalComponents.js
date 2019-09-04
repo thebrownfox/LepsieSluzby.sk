@@ -4,6 +4,9 @@ import Vue from "vue";
 import button from "./components/button.vue";
 Vue.component("nd-button", button);
 
+import files from "./components/fileupload.vue";
+Vue.component("nd-files", files);
+
 import footer from "./components/footer.vue";
 Vue.component("nd-footer", footer);
 

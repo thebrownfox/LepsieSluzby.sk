@@ -2,6 +2,7 @@
     <select
         v-model="selected"
         @input="$emit('input', $event.target.value)"
+        @change="$emit('input', $event.target.value)"
         class="govuk-select"
         id="select-category"
         name="select-category"
@@ -33,9 +34,16 @@ export default {
     watch: {
         options(value) {
             if (!value.includes(this.selected)) {
+                console.log("true");
                 this.selected = value[0].value;
                 this.$emit("input", this.selected);
             }
+        }
+    },
+    mounted() {
+        if (!this.options.includes(this.selected)) {
+            this.selected = this.options[0].value;
+            this.$emit("input", this.selected);
         }
     }
 };

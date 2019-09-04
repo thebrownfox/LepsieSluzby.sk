@@ -54,15 +54,7 @@
                                 Príloha
                                 <em>(nepovinné)</em>
                             </label>
-                            <input
-                                class="govuk-file-upload"
-                                id="file-upload"
-                                name="file-upload"
-                                type="file"
-                                ref="files"
-                                multiple
-                                @change="fileUpload"
-                            />
+                            <nd-files @file="form.files = $event"></nd-files>
                         </div>
 
                         <div class="govuk-form-group">
@@ -90,8 +82,20 @@
                         <button
                             class="govuk-button"
                             @click.prevent="submitForm()"
-                            :disabled="hasSent"
+                            :disabled="hasSent || (!gdpr )"
                         >Vytvoriť</button>
+                        <div class="govuk-checkboxes suhlas">
+                            <div class="govuk-checkboxes__item">
+                                <input v-model="gdpr" class="govuk-checkboxes__input" type="checkbox" />
+                                <label class="govuk-label govuk-checkboxes__label">
+                                    Súhlasím so spracovaním osobných údajov v súlade s nariadením
+                                    <a
+                                        href="https://slovensko.digital/ochrana-osobnych-udajov"
+                                        target="_blank"
+                                    >GDPR o ochrane osobných údajov</a>.
+                                </label>
+                            </div>
+                        </div>
                     </fieldset>
                 </form>
             </div>
@@ -100,10 +104,12 @@
 </template>
 
 <script>
+import { async } from "q";
 export default {
     data() {
         return {
             token: "",
+            gdpr:false,
             hasSent: false,
             form: {
                 categories: {
@@ -112,7 +118,7 @@ export default {
                 },
                 summary: "",
                 description: "",
-                files: null,
+                files: [],
                 name: "",
                 email: ""
             },
@@ -275,14 +281,13 @@ export default {
         }
     },
     methods: {
-        //TODO: Fileupload component
-        fileUpload: function(event) {
-            let uploadedFiles = this.$refs.files.files;
-            if (this.form.files === null) {
-                this.form.files = [];
-            }
-            for (var i = 0; i < uploadedFiles.length; i++) {
-                this.form.files.push(uploadedFiles[i]);
+        logout: async function() {
+            const logoutURL =
+                "https://lepsiesluzby.sk/jira/rest/auth/1/session";
+            try {
+                const logout = await this.axios.delete(logoutURL);
+            } catch (error) {
+                console.log(error);
             }
         },
         postData: async function(inputData) {
@@ -298,12 +303,33 @@ export default {
             try {
                 const post = await this.axios.post(postURL, inputData, config);
                 // TODO: Add files support here
-                if (this.form.files) {
+                if (this.form.files && post) {
                     try {
+                        const attachmentURL =
+                            post.data.self + "/" + "attachments";
+                        const attachmentConfig = {
+                            headers: {
+                                "content-type": "multipart/form-data",
+                                "X-Atlassian-Token": "nocheck"
+                            }
+                        };
+                        const formFiles = new FormData();
+
+                        this.form.files.forEach(file => {
+                            formFiles.append("file", file);
+                        });
+                        const attachment = await this.axios.post(
+                            attachmentURL,
+                            formFiles,
+                            attachmentConfig
+                        );
+                        this.logout();
+                        this.$router.push("success");
                     } catch (error) {
                         console.log(error);
                     }
                 } else {
+                    this.logout();
                     this.$router.push("success");
                 }
             } catch (error) {
@@ -374,5 +400,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.suhlas {
+    margin: 0 0 1rem 0;
+    & label {
+        padding: 0 0 0 1rem;
+        font-size: 1rem;
+        width: 75%;
+    }
+}
 </style>

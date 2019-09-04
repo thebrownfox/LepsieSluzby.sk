@@ -4,16 +4,15 @@
             <main class="govuk-main-wrapper">
                 <div class="govuk-grid-row">
                     <div class="govuk-grid-column text-center">
-                        <img src="/assets/images/srdce_slovensko_digital.png" alt="SD srdce"/>
+                        <img src="/assets/images/srdce_slovensko_digital.png" alt="SD srdce" />
                         <h1 class="sd-heading-l">
                             Je to malý krok pre teba,
                             <br />no veľký krok pre Slovensko
                         </h1>
                         <p>
                             Tvoj čin neostane nepovšimnutý.
+                            <br />Elektronické služby sa budú zlepšovať.
                             <br />Tvoje deti ti budú ďakovať.
-                            <br />Tvoje vnúčatá ti budú ďakovať.
-                            <br />Aj starosta Hornej Dolnej ti ďakuje...
                         </p>
                     </div>
                 </div>

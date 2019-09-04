@@ -90,7 +90,7 @@ export default {
             const searchURL = "https://lepsiesluzby.sk/jira/rest/api/2/search";
             const params = {
                 jql:
-                    "project = SDM  AND component = e-services ORDER BY created DESC",
+                    "project = SDM  AND component = e-services AND status != New ORDER BY created DESC",
                 fields: "summary,created,customfield_10204",
                 maxResults: "5"
             };
