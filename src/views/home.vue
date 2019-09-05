@@ -90,7 +90,7 @@ export default {
             const searchURL = "https://lepsiesluzby.sk/jira/rest/api/2/search";
             const config = {
                 headers: {
-                    "X-Atlassian-Token": "nocheck"
+                    "X-LepsieSluzby-Anonymous": true
                 },
                 params: {
                     jql:

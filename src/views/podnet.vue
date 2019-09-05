@@ -22,6 +22,9 @@
                                 v-model="form.summary"
                                 @blur="valid.summary = validInput(form.summary, 'text')"
                             />
+                             <span class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span> Toto pole je povinné.
+                            </span>
                         </div>
 
                         <div class="govuk-form-group">
@@ -35,6 +38,9 @@
                                 v-model="form.description"
                                 @blur="valid.description = validInput(form.description, 'text')"
                             ></textarea>
+                             <span class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span> Toto pole je povinné.
+                            </span>
                         </div>
 
                         <div class="govuk-form-group">
@@ -89,6 +95,9 @@
                                 v-model="form.email"
                                 @blur="valid.email = form.email === '' || validInput(form.email, 'email')"
                             />
+                            <span class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span> Email je v nesprávnej forme.
+                            </span>
                         </div>
 
                         <button
@@ -477,5 +486,15 @@ export default {
 }
 .error-input {
     outline: 3px solid red;
+   & + .govuk-error-message{
+        visibility: visible;
+    }
+}
+.govuk-error-message {
+    visibility: hidden;
+    margin: 0.75rem 0;
+}
+#govuk-textarea-description{
+    margin-bottom: 0;
 }
 </style>
