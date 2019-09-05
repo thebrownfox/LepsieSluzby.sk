@@ -23,7 +23,7 @@
                         <td>{{ file.name }}</td>
                         <td>{{file.size / 1000 + " kB"}}</td>
                         <td>
-                            <span @click.prevent="removeFile(index)">x</span>
+                            <span @click.prevent="removeFile(index)">&#10060;</span>
                         </td>
                     </tr>
                 </tbody>
@@ -72,7 +72,6 @@ export default {
                     this.maxSize
                 ) {
                     //TODO: Vypis chybovu hlasku
-                    
                 } else {
                     this.files.push(uploadedFiles[i]);
                 }
