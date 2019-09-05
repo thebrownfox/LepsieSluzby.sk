@@ -256,12 +256,6 @@ export default {
                             },
                             {
                                 self:
-                                    "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10222",
-                                value: "Ukončenie podnikania",
-                                id: "10222"
-                            },
-                            {
-                                self:
                                     "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10223",
                                 value: "Podnikanie",
                                 id: "10223"
@@ -271,6 +265,24 @@ export default {
                                     "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10224",
                                 value: "Začatie podnikania",
                                 id: "10224"
+                            },
+                            {
+                                self:
+                                    "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10400",
+                                value: "Podpora podnikania",
+                                id: "10400"
+                            },
+                            {
+                                self:
+                                    "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10401",
+                                value: "Veda, výskum a inovácie",
+                                id: "10401"
+                            },
+                            {
+                                self:
+                                    "https://lepsiesluzby.sk/jira/rest/api/2/customFieldOption/10222",
+                                value: "Ukončenie podnikania",
+                                id: "10222"
                             }
                         ]
                     },
