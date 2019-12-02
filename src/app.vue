@@ -10,6 +10,14 @@
       <!-- content -->
       <keep-alive>
         <router-view></router-view>
+        <vue-recaptcha
+          sitekey="6LcyosUUAAAAALONoX3sSOfB3o0XTgTYgpZhvuzv"
+          :loadRecaptchaScript="true"
+          ref="invisibleRecaptcha"
+          @verify="onCaptchaVerified"
+          @expired="onCaptchaExpired"
+          size="invisible"
+        ></vue-recaptcha>
       </keep-alive>
     </div>
     <!-- footer -->
@@ -20,9 +28,12 @@
 </template>
 
 <script>
+import VueRecaptcha from "vue-recaptcha";
 export default {
+  components: { VueRecaptcha },
   data() {
     return {
+      token: "",
       headerOptions: {
         responsiveClass: "sdn-header-1200",
         productName: "lepšie služby",
@@ -46,12 +57,17 @@ export default {
     getRidOfRecaptchaBadge: function() {
       let badge = document.querySelector(".grecaptcha-badge");
       badge.parentNode.style.display = "none";
+    },
+    onCaptchaExpired() {
+      this.$refs.invisibleRecaptcha.reset();
+    },
+    onCaptchaVerified(token) {
+      console.log("logging in...", token);
+      this.token = token;
     }
   },
   mounted() {
-    this.$recaptchaLoaded().then(() => {
-      this.getRidOfRecaptchaBadge();
-    });
+    this.$refs.invisibleRecaptcha.execute();
     let srcAttrs = document.querySelectorAll("[src]");
 
     srcAttrs.forEach(element => {

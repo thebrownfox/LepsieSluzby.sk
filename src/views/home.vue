@@ -64,7 +64,7 @@ export default {
                 };
 
                 const niceDate = date => {
-                    const dateObj = new Date(date);
+                    const dateObj = new Date(Date.parse(date.replace(/\b(\+[0-9]{4})\b/gi,"")));
                     return `${dateObj.getDate()}. ${dateObj.getMonth() +
                         1}. ${dateObj.getFullYear()}`;
                 };
