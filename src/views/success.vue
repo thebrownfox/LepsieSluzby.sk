@@ -18,26 +18,28 @@
                 </div>
             </main>
         </div>
+      </main>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {};
-    }
+  data() {
+    return {};
+  }
 };
 </script>
 
 <style lang="scss">
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 .sd-heading-l {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 42px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
 }
 </style>
