@@ -10,9 +10,6 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
 
-import { VueReCaptcha } from "vue-recaptcha-v3";
-Vue.use(VueReCaptcha, { siteKey: "6Len1KcUAAAAAMYeenXLlLflZFGlRxzDISyyeqX5" });
-
 new Vue({
     render: h => h(App),
     router

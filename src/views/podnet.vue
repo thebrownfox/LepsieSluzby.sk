@@ -111,8 +111,8 @@
 
             <button
               class="govuk-button"
-              @click.prevent="submitForm()"
-              :disabled="hasSent || !gdpr || !isValidForm"
+              @click.prevent="verifyCaptcha"
+              :disabled="!gdpr || !isValidForm"
             >
               Vytvoriť
             </button>
@@ -137,14 +137,28 @@
         </form>
       </div>
     </main>
+    <vue-recaptcha
+      ref="recaptcha"
+      :sitekey="captcha_site_key"
+      :loadRecaptchaScript="true"
+      @verify="onCaptchaVerified"
+      @expired="onCaptchaExpired"
+      size="invisible"
+    ></vue-recaptcha>
   </div>
 </template>
 
 <script>
-import { async } from "q";
+import VueRecaptcha from "vue-recaptcha";
+
 export default {
+  components: { VueRecaptcha },
   data() {
     return {
+      token: "",
+      captcha_script_url:
+        "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
+      captcha_site_key: "6LcyosUUAAAAALONoX3sSOfB3o0XTgTYgpZhvuzv",
       gdpr: false,
       hasSent: false,
       form: {
@@ -350,6 +364,23 @@ export default {
     }
   },
   methods: {
+    verifyCaptcha() {
+      this.$refs.recaptcha.execute();
+    },
+    onCaptchaExpired() {
+      this.$refs.recaptcha.reset();
+    },
+    async onCaptchaVerified(token) {
+      this.token = await token;
+      this.submitForm();
+    },
+    injectScript() {
+      let script_injector = document.createElement("script");
+      script_injector.setAttribute("src", this.captcha_script_url);
+      script_injector.async = false;
+      script_injector.defer = false;
+      document.head.appendChild(script_injector);
+    },
     validInput: function(value, type) {
       let answer = false;
       let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -383,7 +414,8 @@ export default {
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
+          "recaptcha-token": this.token
         }
       };
       try {

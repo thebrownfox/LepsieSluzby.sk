@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build src/index.html --no-minify",
+    "build": "parcel build src/index.html --no-source-maps",
     "script": "find . -name 'index.html' -exec sed -i -e 's/http:\\/\\/localhost:8000//g' {} \\; ",
     "dev": "parcel src/index.html --port 3000"
   },
