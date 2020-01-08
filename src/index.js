@@ -10,7 +10,13 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
 
+import { VueReCaptcha } from "vue-recaptcha-v3";
+Vue.use(VueReCaptcha, {
+    siteKey: "6LdPeM0UAAAAAJGO5mLQ_ESlssA5zC9K3eNotUeQ",
+    autoHideBadge: true,
+});
+
 new Vue({
-    render: h => h(App),
-    router
+    render: (h) => h(App),
+    router,
 }).$mount("#app");

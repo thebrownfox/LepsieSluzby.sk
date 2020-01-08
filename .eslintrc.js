@@ -4,8 +4,10 @@ module.exports = {
         "es6": true
     },
     "extends": [
+        "plugin:vue/recommended",
         "eslint:recommended",
-        "plugin:vue/essential"
+        "prettier/vue",
+        "plugin:prettier/recommended",
     ],
     "globals": {
         "Atomics": "readonly",
@@ -18,24 +20,10 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "vue"
+        "vue",
+        "prettier"
     ],
     "rules": {
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+        "vue/component-name-in-template-casing": ["error", "PascalCase"],
     }
 };

@@ -10,19 +10,19 @@
                 </p>
             </div>
             <div class="govuk-grid-column-two-thirds">
-                <form action="/" method="post" id="submit-form">
+                <form id="submit-form" action="/" method="post">
                     <fieldset class="govuk-fieldset">
                         <div class="govuk-form-group">
                             <label class="govuk-label" for="govuk-input-summary"
                                 >Akú situáciu riešite? Krátky popis.</label
                             >
                             <input
+                                id="govuk-input-summary"
+                                v-model="form.summary"
                                 class="govuk-input"
                                 :class="{ 'error-input': !valid.summary }"
-                                id="govuk-input-summary"
                                 name="govuk-input-summary"
                                 type="text"
-                                v-model="form.summary"
                                 @blur="
                                     valid.summary = validInput(
                                         form.summary,
@@ -45,12 +45,12 @@
                                 >Text podnetu</label
                             >
                             <textarea
+                                id="govuk-textarea-description"
+                                v-model="form.description"
                                 class="govuk-textarea"
                                 :class="{ 'error-input': !valid.description }"
-                                id="govuk-textarea-description"
                                 name="govuk-textarea-description"
                                 rows="5"
-                                v-model="form.description"
                                 @blur="
                                     valid.description = validInput(
                                         form.description,
@@ -96,11 +96,11 @@
                                 <em>(nepovinné)</em>
                             </label>
                             <input
-                                class="govuk-input govuk-!-width-two-thirds"
                                 id="govuk-input-name"
+                                v-model="form.name"
+                                class="govuk-input govuk-!-width-two-thirds"
                                 name="govuk-input-name"
                                 type="text"
-                                v-model="form.name"
                             />
                         </div>
 
@@ -110,12 +110,12 @@
                                 <em>(nepovinné)</em>
                             </label>
                             <input
+                                id="govuk-input-email"
+                                v-model="form.email"
                                 class="govuk-input govuk-!-width-two-thirds"
                                 :class="{ 'error-input': !valid.email }"
-                                id="govuk-input-email"
                                 name="govuk-input-email"
                                 type="text"
-                                v-model="form.email"
                                 @blur="
                                     valid.email =
                                         form.email === '' ||
@@ -132,8 +132,8 @@
 
                         <button
                             class="govuk-button"
-                            @click.prevent="verifyCaptcha"
                             :disabled="!gdpr || !isValidForm"
+                            @click.prevent="createIssue"
                         >
                             Vytvoriť
                         </button>
@@ -161,28 +161,15 @@
                 </form>
             </div>
         </main>
-        <vue-recaptcha
-            ref="recaptcha"
-            :sitekey="captcha_site_key"
-            :loadRecaptchaScript="true"
-            @verify="onCaptchaVerified"
-            @expired="onCaptchaExpired"
-            size="invisible"
-        ></vue-recaptcha>
     </div>
 </template>
 
 <script>
-import VueRecaptcha from "vue-recaptcha";
 import persona from "../jira_personas";
 export default {
-    components: { VueRecaptcha },
     data() {
         return {
             token: "",
-            captcha_script_url:
-                "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
-            captcha_site_key: "6LcyosUUAAAAALONoX3sSOfB3o0XTgTYgpZhvuzv",
             gdpr: false,
             hasSent: false,
             hasOptions: false,
@@ -233,7 +220,7 @@ export default {
                 let persona = this.form.categories.persona;
                 if (persona && persona !== "Žiadne") {
                     let index = this.categories.persona.findIndex(
-                        category => category.value == persona
+                        (category) => category.value == persona
                     );
                     if (this.categories.persona[index].children) {
                         options = options.concat(
@@ -246,26 +233,20 @@ export default {
         },
     },
     methods: {
-        verifyCaptcha() {
-            this.$refs.recaptcha.execute();
-        },
-        onCaptchaExpired() {
-            this.$refs.recaptcha.reset();
-        },
-        async onCaptchaVerified(token) {
-            this.token = await token;
+        async createIssue() {
+            // (optional) Wait until recaptcha has been loaded.
+            await this.$recaptchaLoaded();
+
+            // Execute reCAPTCHA with action "login".
+            const token = await this.$recaptcha("login");
+
+            // Do stuff with the received token.
+            this.token = token;
             this.submitForm();
-        },
-        injectScript() {
-            let script_injector = document.createElement("script");
-            script_injector.setAttribute("src", this.captcha_script_url);
-            script_injector.async = false;
-            script_injector.defer = false;
-            document.head.appendChild(script_injector);
         },
         validInput: function(value, type) {
             let answer = false;
-            let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
             switch (type) {
                 case "email":
@@ -286,14 +267,13 @@ export default {
             const logoutURL =
                 "https://lepsiesluzby.sk/jira/rest/auth/1/session";
             try {
-                const logout = await this.axios.delete(logoutURL);
+                await this.axios.delete(logoutURL);
             } catch (error) {
                 console.log(error);
             }
         },
         postData: async function(inputData) {
             const postURL = "https://lepsiesluzby.sk/jira/rest/api/2/issue";
-            const fileURL = "";
             const config = {
                 headers: {
                     "Content-Type": "application/json",
@@ -315,10 +295,10 @@ export default {
                         };
                         const formFiles = new FormData();
 
-                        this.form.files.forEach(file => {
+                        this.form.files.forEach((file) => {
                             formFiles.append("file", file);
                         });
-                        const attachment = await this.axios.post(
+                        await this.axios.post(
                             attachmentURL,
                             formFiles,
                             attachmentConfig
