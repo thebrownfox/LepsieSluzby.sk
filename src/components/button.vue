@@ -1,11 +1,15 @@
 <template>
-    <button type="button" class="govuk-button"><slot></slot></button>
+    <button
+        type="button"
+        class="govuk-button"
+        @click="$emit('click', $event.target.value)"
+    >
+        <slot></slot>
+    </button>
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
-<style>
-</style>
+<style></style>
