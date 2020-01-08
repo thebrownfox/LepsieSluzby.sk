@@ -1,12 +1,9 @@
 <template>
     <select
-        v-model="selected"
         @input="$emit('input', $event.target.value)"
-        @change="$emit('input', $event.target.value)"
+        @change="$emit('change', $event.target.value)"
         class="govuk-select"
-        id="select-category"
-        name="select-category"
-        v-bind="$attrs"
+        v-bind:value="value"
         @blur="$emit('blur', $event)"
         @focus="$emit('focus', $event)"
     >
@@ -26,28 +23,20 @@ export default {
             default: null
         }
     },
-    data() {
-        return {
-            selected: this.options[0].value
-        };
-    },
     watch: {
-        options(value) {
-            if (!value.includes(this.selected)) {
-                console.log("true");
-                this.selected = value[0].value;
-                this.$emit("input", this.selected);
+        options(newValue) {
+            if (!newValue.includes(this.value)) {
+                this.$emit("input", newValue[0].value);
             }
         }
     },
     mounted() {
-        if (!this.options.includes(this.selected)) {
-            this.selected = this.options[0].value;
-            this.$emit("input", this.selected);
+        if (!this.options.includes(this.value)) {
+            this.$emit("input", this.options[0].value);
         }
     }
 };
 </script>
 
-<style>
+<style lang="scss">
 </style>
