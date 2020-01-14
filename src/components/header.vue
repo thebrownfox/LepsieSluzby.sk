@@ -5,9 +5,17 @@
         role="banner"
         data-module="sdn-header"
     >
-        <div class="sdn-header__container govuk-width-container sdn-header__container--logo">
-            <router-link id="logo-home" :to="(params.homepageUrl)" class="sdn-header__link">
-                <span class="sdn-header__product-name">{{ params.productName }}</span>
+        <div
+            class="sdn-header__container govuk-width-container sdn-header__container--logo"
+        >
+            <router-link
+                id="logo-home"
+                :to="params.homepageUrl"
+                class="sdn-header__link"
+            >
+                <span class="sdn-header__product-name">{{
+                    params.productName
+                }}</span>
                 <slot name="logo"></slot>
             </router-link>
             <div v-if="params.navigation" class="sdn-header__content">
@@ -15,31 +23,45 @@
                     type="button"
                     role="button"
                     class="sdn-header__menu-button sdn-header__menu-button js-header-toggle"
-                    :class="{'sdn-header__navigation--open':revealSubmenu}"
+                    :class="{ 'sdn-header__navigation--open': revealSubmenu }"
                     aria-controls="navigation"
                     aria-label="Show or hide Top Level Navigation"
                     @click="revealSubmenu = !revealSubmenu"
-                >Menu</button>
+                >
+                    Menu
+                </button>
                 <nav>
                     <ul
                         id="navigation"
                         class="sdn-header__navigation"
-                        :class="{'sdn-header__navigation--open':revealSubmenu}"
+                        :class="{
+                            'sdn-header__navigation--open': revealSubmenu,
+                        }"
                         aria-label="Top Level Navigation"
                     >
                         <li v-if="params.show_search" class="sdn-header__form">
                             <form>
-                                <input class="govuk-input" type="text" placeholder="Hľadať" />
+                                <input
+                                    class="govuk-input"
+                                    type="text"
+                                    placeholder="Hľadať"
+                                />
                                 <button type="submit">Hľadať</button>
                             </form>
                         </li>
-                        <li v-for="(item, index) in params.navigation" :key="index">
+                        <li
+                            v-for="(item, index) in params.navigation"
+                            :key="index"
+                        >
                             <a
                                 class="sdn-header__link"
-                                :class="{'sdn-header__link--active':item.active}"
+                                :class="{
+                                    'sdn-header__link--active': item.active,
+                                }"
                                 :href="item.href"
                                 target="_blank"
-                            >{{ item.text }}</a>
+                                >{{ item.text }}</a
+                            >
                         </li>
                     </ul>
                 </nav>
@@ -60,12 +82,12 @@ export default {
     props: {
         options: {
             type: Object,
-            default: () => {}
-        }
+            default: () => {},
+        },
     },
     data() {
         return {
-            revealSubmenu: false
+            revealSubmenu: false,
         };
     },
     computed: {
@@ -75,8 +97,8 @@ export default {
                 params[prop] = this.options[prop];
             }
             return params;
-        }
-    }
+        },
+    },
 };
 </script>
 

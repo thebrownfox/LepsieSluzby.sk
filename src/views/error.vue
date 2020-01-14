@@ -11,14 +11,14 @@ export default {
     props: {
         data: {
             type: Error,
-            default: () => {}
-        }
+            default: () => {},
+        },
     },
     data() {
         return {
-            newError: this.data
+            newError: this.data,
         };
-    }
+    },
 };
 </script>
 

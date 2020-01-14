@@ -1,53 +1,64 @@
 <template>
     <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-heading-m">{{ options.caption }}</caption>
+        <caption class="govuk-table__caption govuk-heading-m">
+            {{
+                options.caption
+            }}
+        </caption>
         <thead class="govuk-table__head">
             <tr class="govuk-table__row">
                 <th
-                    class="govuk-table__header"
-                    :class="{'govuk-table__header--numeric': header.type === Number}"
                     v-for="(header, index) in data.head"
                     :key="index"
+                    class="govuk-table__header"
+                    :class="{
+                        'govuk-table__header--numeric': header.type === Number,
+                    }"
                     scope="col"
-                >{{ header.text }}</th>
+                >
+                    {{ header.text }}
+                </th>
             </tr>
         </thead>
-        <tbody class="govuk-table__body" id="listing">
-            <tr class="govuk-table__row" v-for="(row, index) in data.body" :key="index">
+        <tbody id="listing" class="govuk-table__body">
+            <tr
+                v-for="(row, rowIndex) in data.body"
+                :key="rowIndex"
+                class="govuk-table__row"
+            >
                 <td
+                    v-for="(cell, cellIndex) in row.data"
+                    :key="cellIndex"
                     class="govuk-table__cell"
-                    :class="{'govuk-table__cell--numeric': cell.type === Number}"
-                    v-for="(cell, index) in row.data"
-                    :key="index"
-                >{{ cell }}</td>
+                    :class="{
+                        'govuk-table__cell--numeric': cell.type === Number,
+                    }"
+                >
+                    {{ cell }}
+                </td>
             </tr>
         </tbody>
     </table>
 </template>
 
 <script>
-//TODO: This is for future?
-function tableParams() {
-    this.caption = "";
-}
 export default {
     props: {
         options: {
             type: Object,
             default: () => ({
-                caption: ""
-            })
+                caption: "",
+            }),
         },
         data: {
             type: Object,
             default: () => ({
                 head: [],
-                body: []
-            })
-        }
-    }
+                body: [],
+            }),
+        },
+    },
 };
 </script>
 
-<style>
-</style>
+<style></style>

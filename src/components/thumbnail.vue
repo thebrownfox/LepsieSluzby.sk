@@ -1,10 +1,13 @@
 <template>
     <div class="sdn-thumbnail">
         <div class="sdn-thumbnail-caption">
-            <h2 class="govuk-heading-m">Nefungovali vám správne e-služby, máte nápad?</h2>
-            <p
-                class="govuk-body"
-            >Našli ste chybu? Máte nápad ako ich vylepšiť? Ukážme spoločne, kde je priestor na zlepšenie.</p>
+            <h2 class="govuk-heading-m">
+                Nefungovali vám správne e-služby, máte nápad?
+            </h2>
+            <p class="govuk-body">
+                Našli ste chybu? Máte nápad ako ich vylepšiť? Ukážme spoločne,
+                kde je priestor na zlepšenie.
+            </p>
         </div>
         <div class="sdn-thumbnail-btn">
             <a
@@ -12,21 +15,21 @@
                 role="button"
                 draggable="false"
                 class="govuk-button govuk-button--start"
-            >Zaslať podnet</a>
+                >Zaslať podnet</a
+            >
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    props:{
-        url:{
-            type:String,
-            default: "#"
-        }
-    }
+    props: {
+        url: {
+            type: String,
+            default: "#",
+        },
+    },
 };
 </script>
 
-<style>
-</style>
+<style></style>
