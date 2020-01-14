@@ -2,7 +2,7 @@
 
 ## O projekte
 
-    Priestor, kde sa môžu občania, podnikatelia, ale aj úradníci, zapojiť a upozorniť na problémy elektronických služieb štátu, alebo zaslať podnety v podobe návrhov na ich zlepšenie. Každý podnet je odborne spracovaný, posúdený a posunutý do rúk zodpovedných úradov a správcov elektronických služieb. Všetky podnety sú uverejnené v časti „Zadané podnety“, kde môžete získať prehľad o tom, v akom stave riešenia podnety sú.
+> Priestor, kde sa môžu občania, podnikatelia, ale aj úradníci, zapojiť a upozorniť na problémy elektronických služieb štátu, alebo zaslať podnety v podobe návrhov na ich zlepšenie. Každý podnet je odborne spracovaný, posúdený a posunutý do rúk zodpovedných úradov a správcov elektronických služieb. Všetky podnety sú uverejnené v časti „Zadané podnety“, kde môžete získať prehľad o tom, v akom stave riešenia podnety sú.
 
 ## Development
 
