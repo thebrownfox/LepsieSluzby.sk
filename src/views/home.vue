@@ -69,12 +69,12 @@ export default {
                     if (
                         issue &&
                         issue.fields &&
-                        issue.fields.customfield_10204
+                        issue.fields.customfield_10038
                     ) {
-                        if (issue.fields.customfield_10204.child) {
-                            return `${issue.fields.customfield_10204.value} - ${issue.fields.customfield_10204.child.value}`;
+                        if (issue.fields.customfield_10038.child) {
+                            return `${issue.fields.customfield_10038.value} - ${issue.fields.customfield_10038.child.value}`;
                         } else {
-                            return `${issue.fields.customfield_10204.value}`;
+                            return `${issue.fields.customfield_10038.value}`;
                         }
                     }
                     return "";
