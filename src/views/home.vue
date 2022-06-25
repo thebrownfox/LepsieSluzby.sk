@@ -1,24 +1,40 @@
 <template>
+
     <div>
+
         <nd-hero></nd-hero>
+
         <div class="govuk-width-container">
+
             <main class="govuk-main-wrapper">
+
                 <div class="govuk-grid-row">
+
                     <div
                         class="govuk-grid-column-three-quarters govuk-!-padding-bottom-6"
                     >
+
                         <nd-thumbnail url="/podnet"></nd-thumbnail>
+
                     </div>
+
                 </div>
+
                 <nd-table :data="tableData" :options="tableOptions"></nd-table>
+
                 <nd-button @click.native="openJira()">Zobraziť viac</nd-button>
+
             </main>
+
         </div>
+
     </div>
+
 </template>
 
 <script>
-//TODO: Add notification about new jira issues
+import api from "../apiCalls.js";
+
 export default {
     data() {
         return {
@@ -49,7 +65,6 @@ export default {
                 body: [],
             };
             if (jiraData) {
-                // FIXME: the customfield is hardcoded
                 const categoryName = (issue) => {
                     if (
                         issue &&
@@ -91,9 +106,13 @@ export default {
         },
     },
     mounted: async function () {
-        this.jiraData = await this.getJiraData();
+        this.jiraData = await this.getSuggestions();
     },
     methods: {
+        async getSuggestions() {
+            const response = await api.suggestions.getSuggestions();
+            return response;
+        },
         getJiraData: async function () {
             const searchURL = "https://lepsiesluzby.sk/jira/rest/api/2/search";
             const config = {
@@ -126,3 +145,4 @@ export default {
     max-width: 50ch;
 }
 </style>
+
